@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log-In Page</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    
+    <link rel="stylesheet" href="css/commontheme.css">
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <script type="text/javascript" src="js/Myjs.js"></script>
+	<!-- <script src="js/bootstrap.min.js"></script> -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/popper.js"></script>
+	
+</head>
+<body>
+    <div class="container-fluid">
+        <div  class="row">
+            <div class="col-md-12 p-4">
+                <div class="row">
+                  <div class="col-md-6">
+                      <img src="images/Ava-logo.svg"  class="logo-log">
+                  </div>
+                  <div class="col-md-6">
+                    <img src="images/Logo.svg" class="logo-cab float-end">
+                </div>
+                </div>
+        
+            </div>
+<div class="col-md-11 border-class">
+
+    <div class="col-md-6 log-head justify-content-center">
+        <div class="row">
+            <h1 class="fw-bold">Welcome Back!!</h1>
+            <h5>Login to continue</h5>
+            <form>
+                <div class="log-ID">
+                    <label for="Login-ID" class="form-label">Login ID</label>
+                    <input type="email" class="form-control form-control-lg" id="driverLoginId" placeholder="Enter Login ID">
+                  </div>
+                  <div class="mb-3 log-ID">
+                    <label for="Password" class="form-label">Password(Enter Numbers Only)</label>
+                    <input type="password" class="form-control form-control-lg" id="Password" onkeypress="return onlyNumberKey(event)" placeholder="Enter Password">
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                      Remember Me
+                    </label>
+                  </div>
+                 
+            </form>
+        </div>
+</div>
+<div class="d-grid gap-2 col-11 block-button">
+    <button class="btn btn-primary log-in-button" type="button" id="loginBtn" onClick="validation()">Log In</button>
+   
+  </div>
+  
+            </div>
+        </div>
+        
+    </div>
+    <script type="text/javascript">
+ 
+    
+    
+    
+    //Pass must be number only
+     function onlyNumberKey(evt) {
+         
+        // Only ASCII character in that range allowed
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+            return false;
+        return true;
+    }
+    
+    
+    
+    
+    
+    
+    
+    //RememberMe
+    window.onload = loadCookies;
+
+    function loadCookies() {
+
+        var cookies = document.cookie.split(';');
+
+        var email = cookies[0].split("email=");
+        var password = cookies[1].split("password=");
+
+        document.getElementById("driverLoginId").value = email[1];
+        document.getElementById("Password").value = window.atob(password[1]);
+        console.log(cookies);
+    	document.getElementById('flexCheckDefault').checked = true;
+    	
+    }
+
+    var loginBut = document.getElementById("loginBtn");
+
+    loginBut.addEventListener('click', saveCookie);
+
+
+    function saveCookie() {
+        
+        if(document.getElementById('flexCheckDefault').checked == true) {
+            
+            var emailId = document.getElementById("driverLoginId").value;
+            var password = window.btoa(document.getElementById("Password").value);
+
+            var d = new Date();
+            d.setTime(d.getTime() + 24*60*60*1000);
+            d.toUTCString();
+
+            console.log(emailId, password, d);
+
+            document.cookie = "LoginId="+emailId +";"+ "expires="+d + ";path=/";
+            document.cookie = "password="+password +";"+ "expires="+d + ";path=/";
+
+        }
+
+    }
+    
+    
+
+    function loadCookies() {
+
+   	 //sometimes the order change
+   	// var cookies = document.cookie.split(';');
+   	//
+   	// var email = cookies[0].split("email=");
+   	// var password = cookies[1].split("password=");
+   	//
+   	// document.getElementById("email").value = email[1];
+   	// document.getElementById("password").value = window.atob(password[1]);
+   	var cookies = document.cookie
+   	.split(';')
+   	.map(cookie => cookie.split('='))
+   	.reduce((accumulator, [key, value]) => ({...accumulator, [key.trim()]: decodeURIComponent(value)}), {});
+   	if(cookies.email == undefined || cookies.password == undefined) {
+   	return false;
+   	}
+
+   	 document.getElementById("email").value = cookies.email;
+   	document.getElementById("password").value = window.atob(cookies.password);
+   	document.getElementById('rememberCheck').checked = true;
+   	}
+   
+   
+    
+    
+    </script>
+</body>
+</html>
