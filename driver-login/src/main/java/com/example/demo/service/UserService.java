@@ -42,6 +42,6 @@ public class UserService implements UserDetailsService {
     	
 		
 
-        return new User(cabInfo.getCabNumber(),driverInfo.getPassword(),true,true,true,true,null);
+        return new User(cabInfo.getCabNumber(),driverInfo.getPassword(),new ArrayList<>());
     }
 }

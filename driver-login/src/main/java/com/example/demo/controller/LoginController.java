@@ -28,7 +28,7 @@ public class LoginController {
     		 return ResponseEntity.ok(loginBl.validateUser(userRequest));
     	}
     	catch (BadCredentialsException |  UsernameNotFoundException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Bad Credential");
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Bad Credential");
 			
 		} 
 

@@ -14,6 +14,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,9 +55,9 @@ public class LoginBl {
 
 			//for db authentication spring security
 										//spring security authentication
-			authManager.authenticate(new UsernamePasswordAuthenticationToken(driver.getLoginId(), driver.getPassword()));
+			Authentication auth = authManager.authenticate(new UsernamePasswordAuthenticationToken(driver.getLoginId(), driver.getPassword()));
 			jwt="Bearer "+jwtUtil.generateToken(driver.getLoginId());
-			
+			SecurityContextHolder.getContext().setAuthentication(auth);
 		
 			//this exception occurs on invalid credentials or if account is locked
 		} catch (BadCredentialsException |  UsernameNotFoundException e) {

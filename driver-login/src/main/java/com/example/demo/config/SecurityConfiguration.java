@@ -60,8 +60,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		  http.csrf().disable()
 			.authorizeRequests().antMatchers("/authenticate").permitAll()
 			.antMatchers("/DriverLogin.html").permitAll()
-			.antMatchers("/notification")
-			.permitAll().anyRequest().
+			.anyRequest().
 			 authenticated()
 			 
 //			 .and()
@@ -76,10 +75,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 				.logoutSuccessUrl("/DriverLogin.html")
 				//delete jwt token after logout
 				.invalidateHttpSession(true)
-				.clearAuthentication(true)
+				.clearAuthentication(true);
 			 
-			.and()
-			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//			.and()
+//			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
       
         
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
