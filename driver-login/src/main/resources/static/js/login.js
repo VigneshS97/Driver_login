@@ -1,6 +1,11 @@
 /**
  * 
  */
+    
+
+ 
+ 
+ 
  
  //load cookies if exist
 window.onload = loadCookies;
@@ -112,8 +117,9 @@ var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
     	
     	if(xhr.readyState == 4 && xhr.status ==200) {
-    		saveCookie();
-    		window.location.href="notification.html";
+    	saveCookie();
+    	var loginId = $("#driverLoginId").val();
+    	 window.location.href="No Trip Assigned Page.html?cabNumber="+ loginId;
     		
     	}
     	if(xhr.readyState == 4 && xhr.status == 401){

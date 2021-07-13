@@ -1,15 +1,14 @@
 package com.example.demo.repo;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
-
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.model.DriverInfo;
+import com.example.demo.model.AdminContacts;
+
 
 @Repository
-public interface DriverInfoRepo extends MongoRepository<DriverInfo, Integer>{
+public interface AdminContactsRepository extends MongoRepository<AdminContacts, Integer> {
+
 	
 
-	DriverInfo findByDriverId(long driverId);
-	
 }
