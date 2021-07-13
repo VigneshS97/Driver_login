@@ -33,6 +33,7 @@ public class LoginBl {
 	private JwtUtils jwtUtil;
 	
 	public String validateUser(@RequestBody UserRequest driver) throws ExecutionException, InterruptedException, MalformedURLException {
+		
 		String jwt = null;
 		
 		CabInfo cabInfo = this.loginDl.findByCabNumber(driver.getLoginId());

@@ -346,7 +346,7 @@ function processResponseToGetShow() {
 
 function cancelTripFunction() {
 			startTrip();
-			window.location.href = 'No Trip Assigned Page.html'
+			window.location.href = 'No-Trip-Assigned-Page.html'
 
 
 		}
@@ -423,6 +423,36 @@ function processResponseforCabInfo() {
                  window.location.href = "Trip-InProgress.html?TripId="+id;
                  }
                  }  
+
+// DRIVER PROFILE SCRIPT STARTS HERE
+
+//  window.onload = driverProfile;
+function driverProfile() {
+
+	xhttp.open("GET", "http://localhost:8083/driverProfile/"+cabId, false);
+
+	xhttp.onreadystatechange = function() {
+
+		if (this.readyState == 4 && this.status == 200) {
+
+
+			response = JSON.parse(this.responseText)
+
+			var driveName = $('#drive-profile1').text();
+			var intials = response.driverName.charAt(0);//+ response.driverName.charAt(1) ;
+			var nameicon = $('#nameicon').text(intials);
+
+			document.getElementById("driver-profile1").innerText = response.driverName;
+			//document.getElementById("driver-profile2").innerText = response.role;
+			document.getElementById("driver-profile3").innerText = response.cabNumber;
+
+
+		}
+	};
+	xhttp.send();
+}
+
+// DRIVER PROFILE SCRIPT ENDS HERE
 
 
 

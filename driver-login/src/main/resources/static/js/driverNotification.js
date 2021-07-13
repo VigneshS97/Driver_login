@@ -1,6 +1,9 @@
 var tripId;
 
 var response;
+
+var cabId = sessionStorage.getItem('commonFileCabNumber');
+alert('from ntrip assigned page' + cabId);
 //DRIVER NOTIFICATION SCRIPT STARTS HERE 
 
 function tripDetails() {
@@ -17,13 +20,13 @@ function onloadFunctionCalls(){
 	setInterval('driverNotification()', 5000);
 	driverProfile();
 }
-var search=window.location.search;
- var id = search.split("=")[1]; 
+/*var search=window.location.search;
+ var id = search.split("=")[1];*/ 
  
 function driverNotification() {
 	 //temporary comment
 
-	xhttp.open("GET", "http://localhost:8083/notification/"+id, true);
+	xhttp.open("GET", "http://localhost:8083/notification/"+cabId, true);
 
 	xhttp.onreadystatechange = processNotification;
 	
@@ -101,7 +104,7 @@ function driverNotification() {
 //  window.onload = driverProfile;
 function driverProfile() {
 
-	xhttp.open("GET", "http://localhost:8083/driverProfile/"+id, false);
+	xhttp.open("GET", "http://localhost:8083/driverProfile/"+cabId, false);
 
 	xhttp.onreadystatechange = function() {
 

@@ -285,7 +285,8 @@ let ab = Number(id);
 	xhrupdate.open("PUT", "http://localhost:8083/updateme/"+ab,true);
 	xhrupdate.onreadystatechange = function() {
 		if (xhrupdate.readyState == 4 && xhrupdate.status == 200) {
-			window.location.href = "No Trip Assigned Page.html"+;
+		    var loginId = $("#driverLoginId").val();
+			window.location.href = "No-Trip-Assigned-Page.html"+loginId;
 		}
 		
 

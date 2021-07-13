@@ -3,7 +3,7 @@
  */
     
 
- 
+ window.sessionStorage;
  
  
  
@@ -118,8 +118,9 @@ var xhr = new XMLHttpRequest();
     	
     	if(xhr.readyState == 4 && xhr.status ==200) {
     	saveCookie();
-    	var loginId = $("#driverLoginId").val();
-    	 window.location.href="No Trip Assigned Page.html?cabNumber="+ loginId;
+    	
+    	getCabDetails();
+    	
     		
     	}
     	if(xhr.readyState == 4 && xhr.status == 401){
@@ -148,4 +149,21 @@ var xhr = new XMLHttpRequest();
 //    	return data;
 //    }
     
-    
+    var cabDetail;
+    function getCabDetails(){
+    	var xhrCabdetails = new XMLHttpRequest();
+    	var cabId= $("#driverLoginId").val();
+    	xhrCabdetails.open("GET","http://localhost:8083/CabInfo/" +cabId ,true);
+    	xhrCabdetails.onreadystatechange = function(){
+    		if(xhrCabdetails.readyState==4 && xhrCabdetails.status==200){
+    			cabDetail= JSON.parse(this.responseText);
+    			sessionStorage.setItem('commonFileCabNumber',cabDetail.cabNumber);
+    			sessionStorage.setItem('commonFileDriverName',cabDetail.driverName);
+    			sessionStorage.setItem('commonFileDriverName',cabDetail.driverId);
+    			sessionStorage.setItem('commonFileDriverName',cabDetail.cabModel);
+    			sessionStorage.setItem('commonFileDriverName',cabDetail.availableSeats);
+    	 		window.location.href= "No-Trip-Assigned-Page.html";
+    		}
+    	};
+    	xhrCabdetails.send(null);
+    }
