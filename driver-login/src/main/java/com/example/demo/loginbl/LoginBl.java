@@ -1,18 +1,13 @@
 package com.example.demo.loginbl;
 
 import java.net.MalformedURLException;
-import java.security.Principal;
-import java.util.Base64;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.concurrent.ExecutionException;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.LockedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,8 +22,6 @@ import com.example.demo.util.JwtUtils;
 @Component
 public class LoginBl {
 	
-	@Autowired
-	private UserRequest empBo;
 	
 	@Autowired
 	private AuthenticationManager authManager;
@@ -50,11 +43,7 @@ public class LoginBl {
 		
 		
 		try {
-			//decode the base64 encoded password
-			
-
-			//for db authentication spring security
-										//spring security authentication
+			//spring security authentication
 			Authentication auth = authManager.authenticate(new UsernamePasswordAuthenticationToken(driver.getLoginId(), driver.getPassword()));
 			jwt="Bearer "+jwtUtil.generateToken(driver.getLoginId());
 			SecurityContextHolder.getContext().setAuthentication(auth);
