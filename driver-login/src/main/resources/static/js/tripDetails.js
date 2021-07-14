@@ -473,9 +473,12 @@ xhttp.open("GET", "http://localhost:8083/adminContactDetails", true);
 	xhttp.send();
 	}
 
+//ADMIN CONTACTS SCRIPT ENDS HERE
 
-              //ADMIN CONTACTS SCRIPT ENDS HERE
-
+function logOut(){
+    	sessionStorage.clear();
+    	window.location.href =  "http://localhost:8083/DriverLogin.html";
+    }
 
 
 
