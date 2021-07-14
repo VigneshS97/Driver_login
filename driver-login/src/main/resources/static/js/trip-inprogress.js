@@ -3,8 +3,14 @@
  */
  "http://localhost:8083//bookings/status" +id+ "/" + status
 // var id = 101;
+
+var cabNumber = sessionStorage.getItem('commonFileCabNumber');
+var drivername = sessionStorage.getItem('commonFileDriverName');
+ window.onload = screenOnLoadCalls;
 var xhr = new XMLHttpRequest();
-window.onload = tripInprogress;
+var xhrTime = new XMLHttpRequest();
+var time;
+//window.onload = tripInprogress;
 var queryStr = window.location.search;
 	
 	var id = queryStr.split("=")[1];  
@@ -16,7 +22,111 @@ var show = "show";
 var noshow ="noshow";
 var arr;
 var startTime;
+
+
+function screenOnLoadCalls(){
+
+getServerTime();
+tripInprogress();
+driverProfile();
+}
+function getServerTime(){
+xhrTime.open("GET", "http://localhost:8083/getServerTime/"+id, true);
+
+ 
+
+ 
+
+ 
+
+xhrTime.onreadystatechange = processServerTimeResponse;
+
+ 
+
+ 
+
+ 
+
+xhrTime.send(null);
+}
+
+ 
+
+function processServerTimeResponse(){
+if (xhrTime.readyState == 4 && xhrTime.status == 200) {
+time = JSON.parse(xhrTime.responseText);
+
+var p1 = document.createElement("p");
+p1.className = "trip-started";
+
+//p1.innerHTML = "Trip Started At " + hour[0] + ":" + hour[1];
+var hour =time.startTime.split(":");
+if (hour[0] < 12) {
+if (hour[0] >= 10) {
+
+ 
+
+p1.innerHTML = "Trip Started At " + hour[0] + ":" + hour[1] + " AM";
+
+ 
+
+}
+else {
+if (hour[0] == 00) {
+p1.innerHTML = "Trip Started At " + "12" + ":" + hour[1] + " AM";
+}
+
+ 
+
+
+else {
+p1.innerHTML = "Trip Started At " + "0" + hour[0] + ":" + hour[1] + " AM";
+}
+}
+}
+else {
+var hr = hour[0] - 12;
+if (hour[0] >= 10) {
+
+ 
+
+ 
+
+ 
+
+p1.innerHTML = "Trip Started At " + hr + ":" + hour[1] + " PM";
+
+ 
+
+ 
+
+ 
+
+}
+
+ 
+
+else {
+p1.innerHTML = "Trip Started At " + "0" + hr + ":" + hour[1] + " PM";
+}
+}
+document.getElementById("triptime").appendChild(p1);
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
 function tripInprogress() {
+
 	xhr.open("GET", "http://localhost:8083/bookings/status/"+id , true);
 
 	xhr.onreadystatechange = processResponse;
@@ -75,46 +185,13 @@ function processResponse() {
 
 
 
-		var p1 = document.createElement("p");
-		p1.className = "trip-started";
-		p1.innerHTML = "Trip Started At " + hour[0] + ":" + hour[1];
-
-		var hour = arr[0].timeSlot.split(":");
-		if (hour[0] < 12) {
-			if (hour[0] >= 10) {
-
-				p1.innerHTML = "Trip Started At " + hour[0] + ":" + hour[1] + " AM";
-
-			}
-			else {
-				if (hour[0] == 00) {
-					p1.innerHTML = "Trip Started At " + "12" + ":" + hour[1] + " AM";
-				}
-
-				else {
-					p1.innerHTML = "Trip Started At " + "0" + hour[0] + ":" + hour[1] + " AM";
-				}
-			}
-		}
-		else {
-			var hr = hour[0] - 12;
-			if (hour[0] >= 10) {
-
-				p1.innerHTML = "Trip Started At " + hr + ":" + hour[1] + " PM";
-
-			}
-
-
-			else {
-				p1.innerHTML = "Trip Started At " + "0" + hr + ":" + hour[1] + " PM";
-			}
-		}
+	
 
 		document.getElementById("trip").appendChild(l);
 		document.getElementById("trip").appendChild(l2);
 		document.getElementById("trip").appendChild(l3);
 
-		document.getElementById("triptime").appendChild(p1);
+		
 
 
 
@@ -285,11 +362,91 @@ let ab = Number(id);
 	xhrupdate.open("PUT", "http://localhost:8083/updateme/"+ab,true);
 	xhrupdate.onreadystatechange = function() {
 		if (xhrupdate.readyState == 4 && xhrupdate.status == 200) {
-		    var loginId = $("#driverLoginId").val();
-			window.location.href = "No-Trip-Assigned-Page.html"+loginId;
+			//sessionStorage.clear();
+			    
+			window.location.href= "No-Trip-Assigned-Page.html";
+
+			
 		}
 		
 
 	};
 	xhrupdate.send(null);
 }
+
+// DRIVER PROFILE SCRIPT STARTS HERE
+
+ //window.onload = driverProfile;
+  
+function driverProfile() {
+
+	
+
+			var CabDriverName=document.getElementById("driver-profile1").innerText = drivername;
+			
+			var intials = CabDriverName.charAt(0);
+			var nameicon = $('#nameicon').text(intials);
+
+			
+			document.getElementById("driver-profile3").innerText = cabNumber;
+}
+// DRIVER PROFILE SCRIPT ENDS HERE
+
+
+
+
+//ADMIN CONTACTS SCRIPT STARTS HERE
+var xhttp = new XMLHttpRequest();
+function adminContacts() {
+	
+xhttp.open("GET", "http://localhost:8083/adminContactDetails", true);
+
+	xhttp.onreadystatechange = function() {
+
+		if (this.readyState == 4 && this.status == 200) {
+
+			response = JSON.parse(this.responseText);
+			for (var i = 0; i < response.length; i++) {
+
+				
+				document.getElementById("adminContact" + i).innerHTML = "<label class='float-start mb-3' id='contacts1'><a class='link contact-number' href='#'>" + response[i].contactNumber + "</a>" + "  -  " + response[i].adminName + "</label>";
+
+			}
+		}
+	};
+	xhttp.send();
+	}
+
+
+              //ADMIN CONTACTS SCRIPT ENDS HERE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -159,9 +159,11 @@ var xhr = new XMLHttpRequest();
     			cabDetail= JSON.parse(this.responseText);
     			sessionStorage.setItem('commonFileCabNumber',cabDetail.cabNumber);
     			sessionStorage.setItem('commonFileDriverName',cabDetail.driverName);
-    			sessionStorage.setItem('commonFileDriverName',cabDetail.driverId);
-    			sessionStorage.setItem('commonFileDriverName',cabDetail.cabModel);
-    			sessionStorage.setItem('commonFileDriverName',cabDetail.availableSeats);
+    			sessionStorage.setItem('commonFileDriverId',cabDetail.driverId);
+    			sessionStorage.setItem('commonFileCabModel',cabDetail.cabModel);
+    			sessionStorage.setItem('commonFileAvailableSeats',cabDetail.availableSeats);
+    			
+    			
     	 		window.location.href= "No-Trip-Assigned-Page.html";
     		}
     	};

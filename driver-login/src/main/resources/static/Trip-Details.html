@@ -27,7 +27,7 @@
 
 					<!-- Admin Contact Part Starts Here -->
 					<div class="dropdown float-start">
-						<a href="#" data-toggle="dropdown" aria-expanded="false"> <img class="cursor mt-1"
+						<a href="#" data-toggle="dropdown" aria-expanded="false" onclick="adminContacts()"> <img class="cursor mt-1"
 								src="images/Phone-icon.svg" alt="filter-icon" title="Advanced Filter" /></a>
 						<div class="dropdown-menu m-0 admin-contact">
 							<div class="container-fluid">
@@ -40,12 +40,14 @@
 									</div>
 									<div class="col-md-12">
 										<div class="row mb-3">
-											<div>
-												<label class="float-start mb-3"><a class="link contact-number"
-														href="#">+91 (123)456-7890</a>-Raghavan</label>
-												<label class="float-start"><a class="link contact-number" href="#">+91
-														(456)778-4569</a>-Santhosh</label>
-											</div>
+											<div id="adminContact0">
+
+                                            </div>
+                                            <div id="adminContact1">
+
+                                            </div>
+											
+											
 										</div>
 									</div>
 								</div>
@@ -70,30 +72,30 @@
                                     </div>
                                     <div class="col-md-12 ps-0">
                                         <div class="row mb-3">
-                                            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                                            <!-- <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                                 <li class="nav-item nav-1" role="presentation">
-                                                  <a class="nav-link active" id="pills-home-tab" aria-selected="true">Assigned Trips</a>
+                                                  <a class="nav-link active" id="pills-home-tab" aria-selected="true"></a>
                                                 </li>
                                                                                                
-                                              </ul>
+                                              </ul> -->
                                               <div class="tab-content" id="pills-tabContent">
                                                 <div class="tab-pane active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                                                     <div class="container-fluid">
                                                         <div class="row">
                                                       <div class="col-md-12 mt-2 mb-3 p-0" data-toggle="modal" data-target="#tripstarted">
-                                                                <p class="float-end indicator mt-0">8:15 PM</p>
-                                                                <h5 class="">You have been assigned a trip</h5>
-                                                                <a class="float-start footer-link pb-4"><img
+                                                                <p class="float-end indicator mt-0"></p>
+                                                                <h5 class=""></h5>
+                                                               <!--  <a class="float-start footer-link pb-4"><img
                                                                         src="images/Map-table.svg" alt="map-icon"
-                                                                        class="mx-1 map-icon1">Alpha City To Sholinganallur @ 8:30
-                                                                    PM </a>
+                                                                        class="mx-1 map-icon1">
+                                                                    </a> -->
                                                             </div>
                                                            
                                                         </div>
                                                    
                                                     <div class="col-md-6 float-start mt-1 mb-0 p-0">
                                                         
-                                                            <p class="mb-0 not-status">1 Notification</p>
+                                                            <p class="mb-0 not-status"></p>
                                                         
                                                     </div>
                                                     </div>
@@ -130,7 +132,7 @@
 					<!-- profile Starts Here -->
 
 					<div class="dropdown float-start">
-						<a href="#"  onclick="driverProfile()" data-toggle="dropdown" aria-expanded="false"> <span class="dot ms-4" onclick="driverProfile()"></span></a>
+						<a href="#" data-toggle="dropdown" aria-expanded="false"> <span class="dot11 ms-4" id="nameicon" onclick="driverProfile()"></span></a>
 						<div class="dropdown-menu m-0 sign-out">
 							<div class="container-fluid">
 								<div class="row">
@@ -143,10 +145,10 @@
 										<div class="row mb-3">
 											<div>
 												<img src="images/User-Icon.svg" class="ps-4" alt="user-icon">
-												 <h6 id="driver-profile1"></h6>
+												<h6 id="driver-profile1"></h6>
                                                 <h6 id="driver-profile2">Driver</h6>
-                                                <h6 id="driver-profile3"></h6>
-												<button type="button" class="btn btn-primary btn-lg pe-4">Log
+                                                <h6 id="driver-profile3" ></h6>
+												<button type="button" class="btn btn-primary btn-lg pe-4" onClick="logOut()">Log
 													Out</button>
 											</div>
 										</div>
@@ -254,6 +256,7 @@
 	<script src="js/tripDetails.js"></script>
 	
 	<script>
+	
 		$('.advanced-filter').click(function (event) {
 			event.stopPropagation();
 
@@ -282,6 +285,11 @@
 			$('.nav-link1').removeClass('active');
 
 		})
+		 function logOut(){
+    	sessionStorage.clear();
+    	window.location.href =  "http://localhost:8083/DriverLogin.html";
+    }
+
 	</script>
 		
 

@@ -3,7 +3,7 @@ var tripId;
 var response;
 
 var cabId = sessionStorage.getItem('commonFileCabNumber');
-alert('from ntrip assigned page' + cabId);
+
 //DRIVER NOTIFICATION SCRIPT STARTS HERE 
 
 function tripDetails() {
@@ -142,7 +142,7 @@ function adminContacts() {
 			response = JSON.parse(this.responseText);
 			for (var i = 0; i < response.length; i++) {
 
-				document.getElementById
+				
 				document.getElementById("adminContact" + i).innerHTML = "<label class='float-start mb-3' id='contacts1'><a class='link contact-number' href='#'>" + response[i].contactNumber + "</a>" + "  -  " + response[i].adminName + "</label>";
 
 			}
@@ -154,7 +154,12 @@ function adminContacts() {
 
               //ADMIN CONTACTS SCRIPT ENDS HERE
 
-
+ function logOut(){
+    	sessionStorage.clear();
+//    	document.getElementById("adminContact0").style.visibility = "hidden";
+//    	document.getElementById("adminContact1").style.visibility = "hidden";
+//    	alert("Logout Successfully");
+    }
 
 
 

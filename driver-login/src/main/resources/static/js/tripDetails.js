@@ -1,16 +1,23 @@
 var xhr = new XMLHttpRequest();
+//window.addEventListener = ("load",getdetail,true);
+
 window.onload = getdetail;
-//window.onload =refreshfunction ;
-  //to get the details of the employees with the same tripcapid when the
+
+
+
+var cabNumber = sessionStorage.getItem('commonFileCabNumber');
+var drivername = sessionStorage.getItem('commonFileDriverName');
+
 var count;                   //screen loads
 var queryStr = window.location.search;
 	
 	var id = queryStr.split("=")[1];   
 	
-
+var driveName;
 
 	
 function getdetail() {
+driverProfile();
 	                              
 	xhr.open("GET", "http://localhost:8083/Getalldetails/" + id, true);
 
@@ -426,33 +433,55 @@ function processResponseforCabInfo() {
 
 // DRIVER PROFILE SCRIPT STARTS HERE
 
-//  window.onload = driverProfile;
+ //window.onload = driverProfile;
+  
 function driverProfile() {
 
-	xhttp.open("GET", "http://localhost:8083/driverProfile/"+cabId, false);
+	
+
+			var CabDriverName=document.getElementById("driver-profile1").innerText = drivername;
+			
+			var intials = CabDriverName.charAt(0);
+			var nameicon = $('#nameicon').text(intials);
+
+			
+			document.getElementById("driver-profile3").innerText = cabNumber;
+}
+// DRIVER PROFILE SCRIPT ENDS HERE
+
+
+
+//ADMIN CONTACTS SCRIPT STARTS HERE
+var xhttp = new XMLHttpRequest();
+function adminContacts() {
+	
+xhttp.open("GET", "http://localhost:8083/adminContactDetails", true);
 
 	xhttp.onreadystatechange = function() {
 
 		if (this.readyState == 4 && this.status == 200) {
 
+			response = JSON.parse(this.responseText);
+			for (var i = 0; i < response.length; i++) {
 
-			response = JSON.parse(this.responseText)
+				
+				document.getElementById("adminContact" + i).innerHTML = "<label class='float-start mb-3' id='contacts1'><a class='link contact-number' href='#'>" + response[i].contactNumber + "</a>" + "  -  " + response[i].adminName + "</label>";
 
-			var driveName = $('#drive-profile1').text();
-			var intials = response.driverName.charAt(0);//+ response.driverName.charAt(1) ;
-			var nameicon = $('#nameicon').text(intials);
-
-			document.getElementById("driver-profile1").innerText = response.driverName;
-			//document.getElementById("driver-profile2").innerText = response.role;
-			document.getElementById("driver-profile3").innerText = response.cabNumber;
-
-
+			}
 		}
 	};
 	xhttp.send();
-}
+	}
 
-// DRIVER PROFILE SCRIPT ENDS HERE
+
+              //ADMIN CONTACTS SCRIPT ENDS HERE
+
+
+
+
+
+
+
 
 
 
