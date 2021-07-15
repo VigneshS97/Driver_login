@@ -24,12 +24,12 @@ public interface BookingRepository extends MongoRepository<BookingRequest, Long>
 
 	
 	 public Optional<List<BookingRequest>> findByStatus(String srchstatus);
-	Optional<BookingRequest> findByEmployeeIdAndTripCabId(int empId,long id);
+	Optional<BookingRequest> findByEmployeeIdAndTripCabId(String string,long id);
 	
 	
 	
 	 @Query(value="{employeeId:?0 ,status: 'OnProgress'}")
-		BookingRequest findByEmployeeId(int employeeID);
+		BookingRequest findByEmployeeId(String employeeID);
 	 
 	
 }

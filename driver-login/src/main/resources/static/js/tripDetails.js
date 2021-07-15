@@ -7,11 +7,12 @@ window.onload = getdetail;
 
 var cabNumber = sessionStorage.getItem('commonFileCabNumber');
 var drivername = sessionStorage.getItem('commonFileDriverName');
+var todayTripId = sessionStorage.getItem('commonFileTripId');
 
 var count;                   //screen loads
 var queryStr = window.location.search;
 	
-	var id = queryStr.split("=")[1];   
+	//var  id= queryStr.split("=")[1];   
 	
 var driveName;
 
@@ -19,7 +20,7 @@ var driveName;
 function getdetail() {
 driverProfile();
 	                              
-	xhr.open("GET", "http://localhost:8083/Getalldetails/" + id, true);
+	xhr.open("GET", "http://localhost:8083/Getalldetails/" + todayTripId, true);
 
 	xhr.onreadystatechange = processResponseToGetDetail;
 
@@ -196,7 +197,11 @@ function startTrip() {
 //ongoingForTripCabInfo();
 starttripforshow();
    //-- rohit
-
+	onlyforNoshow();
+	
+}
+	function onlyforNoshow(){
+	
 	for (var i = 0; i < count; i++) {
 		var div = document.getElementById("divid");
 		var radiv = document.getElementById("radio-" + (i + (i + 1)));
@@ -223,7 +228,7 @@ starttripforshow();
 	ongoingForTripCabInfo();
 	
 
-var url = "http://localhost:8083/update/for/" + id;
+var url = "http://localhost:8083/update/for/" + todayTripId;
 
 	start.open("PUT", url, true);
 
@@ -244,8 +249,7 @@ function processResponseToGetNoShow() {
 
 
 	}
-}
-	
+	}
 
 
 
@@ -253,7 +257,7 @@ function processResponseToGetNoShow() {
 function recheckCount(){
 //alert("hi");
 
-	xhr.open("GET", "http://localhost:8083/Getalldetails/" + id,false);
+	xhr.open("GET", "http://localhost:8083/Getalldetails/" + todayTripId,false);
 
 	xhr.onreadystatechange = processResponseBeforeStart;
 
@@ -330,7 +334,7 @@ function starttripforshow() {
 	
 
 
-	var url = "http://localhost:8083/update/for/show/" + id;
+	var url = "http://localhost:8083/update/for/show/" + todayTripId;
 
 	startforshow.open("PUT", url, true);
 
@@ -352,7 +356,8 @@ function processResponseToGetShow() {
 }
 
 function cancelTripFunction() {
-			startTrip();
+			onlyforNoshow();
+			
 			window.location.href = 'No-Trip-Assigned-Page.html'
 
 
@@ -404,20 +409,20 @@ function cancelTripFunction() {
 
 
 
-function TripInProgressscreen(){
+/*function TripInProgressscreen(){
  
 		//ongoingForTripCabInfo();
 			//onclick="ongoingTripFunction()"
-			window.location.href = "Trip-InProgress.html?TripId="+id;
+			window.location.href = "Trip-InProgress.html?TripId="+;
 
 }
-
+*/
 
 var xhrupdate = new XMLHttpRequest();
 
 function ongoingForTripCabInfo() {
 	                              
-	xhrupdate.open("PUT",  "http://localhost:8083/updateme/Ongoing/" + id, true);
+	xhrupdate.open("PUT",  "http://localhost:8083/updateme/Ongoing/" + todayTripId, true);
 
 	xhrupdate.onreadystatechange = processResponseforCabInfo;
 
@@ -427,7 +432,7 @@ function ongoingForTripCabInfo() {
 function processResponseforCabInfo() {
 
 	if (xhrupdate.readyState == 4 && xhrupdate.status == 200) {                       
-                 window.location.href = "Trip-InProgress.html?TripId="+id;
+                 window.location.href = "Trip-InProgress.html";
                  }
                  }  
 

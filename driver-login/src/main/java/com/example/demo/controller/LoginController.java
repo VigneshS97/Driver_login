@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import java.util.List;
+
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class LoginController {
     @PostMapping("/authenticate")
     public ResponseEntity<String> authenticate(@RequestBody UserRequest userRequest) throws Exception{
     	try {
-        	
+        	//controller->bl->Dl->Repo->Db
     		 return ResponseEntity.ok(loginBl.validateUser(userRequest));
     	}
     	catch (BadCredentialsException |  UsernameNotFoundException e) {

@@ -163,7 +163,6 @@ var xhr = new XMLHttpRequest();
     			sessionStorage.setItem('commonFileCabModel',cabDetail.cabModel);
     			sessionStorage.setItem('commonFileAvailableSeats',cabDetail.availableSeats);
     			
-    			
     	 		window.location.href= "No-Trip-Assigned-Page.html";
     		}
     	};

@@ -103,7 +103,7 @@ public ResponseEntity<BookingRequest> updatebytripidforshow(@PathVariable("TripI
 
 
 @PutMapping("/employee/status/{employeeId}/{tripId}")
-public ResponseEntity<BookingRequest> storeEmployeeStatus(@PathVariable("employeeId")int employeeID,@PathVariable("tripId")long tripCabID)
+public ResponseEntity<BookingRequest> storeEmployeeStatus(@PathVariable("employeeId")String employeeID,@PathVariable("tripId")long tripCabID)
 {
 	// status = this.service.storeEmployeeStatus(employeeID);
 	BookingRequest savedStatus = this.service.storeEmployeeStatus(employeeID);

@@ -36,7 +36,7 @@ public Optional<List<BookingRequest>> findShowusers(long srchid){
 }
 
 
-public BookingRequest storeEmployeeStatus(int employeeID) {
+public BookingRequest storeEmployeeStatus(String employeeID) {
 	BookingRequest status= repo.findByEmployeeId(employeeID);
 	if (status!= null) {
 		status.setStatus("Reached");

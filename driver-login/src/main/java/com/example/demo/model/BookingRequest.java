@@ -21,7 +21,7 @@ import lombok.Setter;
 public class BookingRequest {
 	@Id
 	public long bookingId ;
-	public  int employeeId ;
+	public  String employeeId ;
 	public String employeeName;
 	public String source;
 	public String destination;

@@ -1,11 +1,12 @@
 /**
  * 
  */
- "http://localhost:8083//bookings/status" +id+ "/" + status
-// var id = 101;
+ // "http://localhost:8083//bookings/status" +TodayTripId+ "/" + status
 
 var cabNumber = sessionStorage.getItem('commonFileCabNumber');
 var drivername = sessionStorage.getItem('commonFileDriverName');
+var TodayTripId = sessionStorage.getItem('commonFileTripId');
+
  window.onload = screenOnLoadCalls;
 var xhr = new XMLHttpRequest();
 var xhrTime = new XMLHttpRequest();
@@ -13,7 +14,7 @@ var time;
 //window.onload = tripInprogress;
 var queryStr = window.location.search;
 	
-	var id = queryStr.split("=")[1];  
+	//var id = queryStr.split("=")[1];  
 	
 	var status= queryStr.split("s=")[1];
 var count;
@@ -31,7 +32,7 @@ tripInprogress();
 driverProfile();
 }
 function getServerTime(){
-xhrTime.open("GET", "http://localhost:8083/getServerTime/"+id, true);
+xhrTime.open("GET", "http://localhost:8083/getServerTime/"+TodayTripId, true);
 
  
 
@@ -127,7 +128,7 @@ document.getElementById("triptime").appendChild(p1);
 
 function tripInprogress() {
 
-	xhr.open("GET", "http://localhost:8083/bookings/status/"+id , true);
+	xhr.open("GET", "http://localhost:8083/bookings/status/"+TodayTripId , true);
 
 	xhr.onreadystatechange = processResponse;
 
@@ -320,7 +321,7 @@ function myfunction(radio) {
 
 
 function reached() {
-	let ab = Number(id);
+	let ab = Number(TodayTripId);
 	
 //alert(id);
 
@@ -357,7 +358,7 @@ function reached() {
 
 function ok() {
 //alert(id); 
-let ab = Number(id);
+let ab = Number(TodayTripId);
 	var xhrupdate = new XMLHttpRequest();
 	xhrupdate.open("PUT", "http://localhost:8083/updateme/"+ab,true);
 	xhrupdate.onreadystatechange = function() {

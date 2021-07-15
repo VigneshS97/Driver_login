@@ -1,14 +1,15 @@
 var tripId;
-
+var cabDetail;
 var response;
 
 var cabId = sessionStorage.getItem('commonFileCabNumber');
+
 
 //DRIVER NOTIFICATION SCRIPT STARTS HERE 
 
 function tripDetails() {
 
-	window.location.href = "Trip-Details.html?tripId=" + tripId;
+	window.location.href = "Trip-Details.html";
 }
 
 
@@ -92,6 +93,7 @@ function driverNotification() {
 
 		}
 
+sessionStorage.setItem('commonFileTripId',tripId);
 	}
 
 
@@ -154,13 +156,15 @@ function adminContacts() {
 
               //ADMIN CONTACTS SCRIPT ENDS HERE
 
+
+ 
+ 
  function logOut(){
     	sessionStorage.clear();
 //    	document.getElementById("adminContact0").style.visibility = "hidden";
 //    	document.getElementById("adminContact1").style.visibility = "hidden";
 //    	alert("Logout Successfully");
     }
-
 
 
 
