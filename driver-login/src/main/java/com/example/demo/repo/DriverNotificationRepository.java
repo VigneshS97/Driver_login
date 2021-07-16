@@ -13,7 +13,7 @@ import com.example.demo.model.TripCabInfo;
 @Repository
 public interface DriverNotificationRepository extends MongoRepository<TripCabInfo, String> {
 
-		@Query(value="{cabNumber:?0,status:{$nin:[Completed]}}")
+		@Query(value="{cabNumber:?0,status:{$nin:[Completed,Cancelled]}}")
 		TripCabInfo getTripAssignedDetailsByCabNumber(String cabNumber);
 		
 }

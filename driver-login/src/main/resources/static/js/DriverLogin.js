@@ -36,7 +36,7 @@ function loadCookies() {
  function validation(){
  				/*header('Content-Type: application/javascript');*/
  
- var letters = /^[0-9a-zA-Z]+$/;
+ var letters = /^[0-9A-Z]+$/;
  if(document.getElementById('driverLoginId').value == undefined ||
  	 document.getElementById('driverLoginId').value == ''||
  	 document.getElementById("driverLoginId").value.length <9||
@@ -125,6 +125,7 @@ var xhr = new XMLHttpRequest();
     	}
     	if(xhr.readyState == 4 && xhr.status == 401){
     	alert("Invalid User");
+    	window.location.reload();
     	}
     }
 

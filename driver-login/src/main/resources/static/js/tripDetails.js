@@ -198,6 +198,7 @@ function startTrip() {
 starttripforshow();
    //-- rohit
 	onlyforNoshow();
+	ongoingForTripCabInfo();
 	
 }
 	function onlyforNoshow(){
@@ -225,7 +226,7 @@ starttripforshow();
 
 	}
 	
-	ongoingForTripCabInfo();
+	
 	
 
 var url = "http://localhost:8083/update/for/" + todayTripId;
@@ -358,8 +359,8 @@ function processResponseToGetShow() {
 function cancelTripFunction() {
 			onlyforNoshow();
 			
-			window.location.href = 'No-Trip-Assigned-Page.html'
-
+			//window.location.href = 'No-Trip-Assigned-Page.html'
+			tripaftercancelling();
 
 		}
 
@@ -479,10 +480,43 @@ xhttp.open("GET", "http://localhost:8083/adminContactDetails", true);
 	}
 
 //ADMIN CONTACTS SCRIPT ENDS HERE
+function tripaftercancelling() {
+                    var xhrupdate = new XMLHttpRequest();              
+    xhrupdate.open("PUT",  "http://localhost:8083/notification/"+cabNumber, true);
 
+ 
+
+    xhrupdate.onreadystatechange = processResponseforCabInfo;
+
+ 
+
+    xhrupdate.send(null);
+}
+
+ 
+
+function processResponseforCabInfo() {
+
+ 
+
+    if (xhrupdate.readyState == 4 && xhrupdate.status == 200) {                       
+                 window.location.href= "No-Trip-Assigned-Page.html";
+                 }
+                 }  
+
+
+
+//logout
 function logOut(){
     	sessionStorage.clear();
-    	window.location.href =  "http://localhost:8083/DriverLogin.html";
+    	window.location.href =  "/logout";
+    	function preventBack() { 
+    	window.history.forward();
+    	 }  
+    setTimeout("preventBack()", 0);  
+    window.onunload = function () {
+     null 
+     };
     }
 
 

@@ -1,7 +1,8 @@
 package com.example.demo;
 
 import java.time.LocalDate;
-
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import com.example.demo.model.BookingRequest;
 import com.example.demo.model.CabInfo;
+import com.example.demo.model.TripCabInfo;
 import com.example.demo.repo.AdminContactsRepository;
 import com.example.demo.repo.BookingRepository;
 import com.example.demo.repo.CabInfoRepo;
@@ -54,7 +58,7 @@ public class DriverLoginApplication {
 				 * 
 				 * 
 				 * BookingRequest book2=new
-				 * BookingRequest(10022,10722,"gokul","alphacity","shollinganallur","velachery",
+				  BookingRequest(10022,10722,"gokul","alphacity","shollinganallur","velachery",
 				 * LocalDateTime.now(),LocalTime.now(),0,10002,null,null,null,null,"assigned",
 				 * null,null,null,null,0); TripCabInfo tripdetails = new TripCabInfo(10001,
 				 * "TN8S6677", 10, "Bayline", "Tambaram", "Shollingnallur", LocalDate.now(),
@@ -64,8 +68,14 @@ public class DriverLoginApplication {
 				 * DriverProfile profile = new DriverProfile("Jawahar","Driver","TN8S6677");
 				 * DriverProfileRepos.save(profile);
 				 */
-
-
+				TripCabInfo tripdetails = new TripCabInfo(10002,"TN50S6677",10,"Bayline","Tambaram","Shollingnalur",LocalDate.now(),
+						LocalTime.now(),10,2,8,LocalTime.of(10, 35),null,"Assigned",null,null,null,null,0);
+				triprepo.save(tripdetails);
+			
+				BookingRequest book2=new BookingRequest(10023,"10723","Ram","alphacity","shollinganallur","velachery",
+						LocalDateTime.now(),LocalTime.now(),0,10002,null,null,null,null,"assigned",null,null,null,null,0);
+				repo.save(book2);
+			
 			}
 		};
 	}

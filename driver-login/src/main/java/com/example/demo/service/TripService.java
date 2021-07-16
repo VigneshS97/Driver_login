@@ -138,6 +138,16 @@ Optional<TripCabInfo> save= triprepo.findById(tripCabID);
 return save.get();
 }
 
+public TripCabInfo getTripAssignedDetailsByCabNumberaftercancelling(String cabNumber) {
+    // TODO Auto-generated method stub
+    Optional<TripCabInfo> save= triprepo.findByCabNumber(cabNumber);
+    TripCabInfo status= save.get();
+    status.setStartTime(LocalTime.now());
+    status.setStatus("Cancelled");
+    
+    return triprepo.save(status);
+}
+
 
 
 }

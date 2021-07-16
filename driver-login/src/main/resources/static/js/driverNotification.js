@@ -161,9 +161,20 @@ function adminContacts() {
  
  function logOut(){
     	sessionStorage.clear();
+    	window.location.href='/logout';
+    	
+    	//disable
+    	function preventBack() { 
+    	window.history.forward();
+    	 }  
+    setTimeout("preventBack()", 0);  
+    window.onunload = function () {
+     null 
+     };
+     
 //    	document.getElementById("adminContact0").style.visibility = "hidden";
-//    	document.getElementById("adminContact1").style.visibility = "hidden";
-//    	alert("Logout Successfully");
+    	document.getElementById("adminContact1").style.visibility = "hidden";
+ 	alert("Logout Successfully");
     }
 
 

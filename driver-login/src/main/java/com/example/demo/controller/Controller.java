@@ -143,38 +143,17 @@ public ResponseEntity<BookingRequest> storeEmployeeStatus(@PathVariable("employe
 	}
 
 //For getting server time-startTime
-@GetMapping("getServerTime/{tripCabID}")
+@GetMapping(path="getServerTime/{tripCabID}")
 public TripCabInfo getBookingTime(@PathVariable("tripCabID") long tripCabID)
 {
 return this.service.getBookingTime(tripCabID);
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@PutMapping(path = "/notification/{cabNumber}")
+public TripCabInfo getNotificationByNumber(@PathVariable("cabNumber") String cabNumber) {
+	TripCabInfo tripObj = this.service.getTripAssignedDetailsByCabNumberaftercancelling(cabNumber);
+	return tripObj;
+}
 
 }

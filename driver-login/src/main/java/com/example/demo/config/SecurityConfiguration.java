@@ -57,11 +57,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 			.authorizeRequests().antMatchers("/authenticate").permitAll()
 			.antMatchers("/DriverLogin.html").permitAll()
 			.anyRequest().
-			 authenticated()
+			 authenticated().and().formLogin()
+			 .loginPage("/DriverLogin.html")
+			 
 			 .and()
 				.logout().logoutUrl("/logout")
+				
 				//back to login page
 				.logoutSuccessUrl("/DriverLogin.html")
+				.deleteCookies("JSESSIONID")
 				//delete jwt token after logout
 				.invalidateHttpSession(true)
 				.clearAuthentication(true);
