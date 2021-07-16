@@ -480,13 +480,13 @@ xhttp.open("GET", "http://localhost:8083/adminContactDetails", true);
 	}
 
 //ADMIN CONTACTS SCRIPT ENDS HERE
-function tripaftercancelling() {
+/*function tripaftercancelling() {
                     var xhrupdate = new XMLHttpRequest();              
     xhrupdate.open("PUT",  "http://localhost:8083/notification/"+cabNumber, true);
 
  
 
-    xhrupdate.onreadystatechange = processResponseforCabInfo;
+    xhrupdate.onreadystatechange = processResponseforCabInfoforcancelling();
 
  
 
@@ -495,7 +495,7 @@ function tripaftercancelling() {
 
  
 
-function processResponseforCabInfo() {
+function processResponseforCabInfoforcancelling() {
 
  
 
@@ -504,6 +504,24 @@ function processResponseforCabInfo() {
                  }
                  }  
 
+*/
+
+function tripaftercancelling() {
+//alert(id); 
+//let ab = Number(id);
+    var xhrupdate = new XMLHttpRequest();
+    xhrupdate.open("PUT", "http://localhost:8083/notification/"+cabNumber,true);
+    xhrupdate.onreadystatechange = function() {
+        if (xhrupdate.readyState == 4 && xhrupdate.status == 200) {
+            //sessionStorage.clear();
+                
+            window.location.href= "No-Trip-Assigned-Page.html";
+
+        }
+
+    };
+    xhrupdate.send(null);
+}
 
 
 //logout
