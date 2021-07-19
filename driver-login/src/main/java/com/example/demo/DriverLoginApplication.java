@@ -68,13 +68,19 @@ public class DriverLoginApplication {
 				 * DriverProfile profile = new DriverProfile("Jawahar","Driver","TN8S6677");
 				 * DriverProfileRepos.save(profile);
 				 */
-				TripCabInfo tripdetails = new TripCabInfo(10002,"TN50S6677",10,"Bayline","Tambaram","Shollingnalur",LocalDate.now(),
-						LocalTime.now(),10,2,8,LocalTime.of(10, 35),null,"Assigned",null,null,null,null,0);
-				triprepo.save(tripdetails);
-			
-				BookingRequest book2=new BookingRequest(10023,"10723","Ram","alphacity","shollinganallur","velachery",
-						LocalDateTime.now(),LocalTime.now(),0,10002,null,null,null,null,"assigned",null,null,null,null,0);
-				repo.save(book2);
+				
+				
+				  TripCabInfo tripdetails = new
+				  TripCabInfo(10003,"TN50S6677",10,"Bayline","Tambaram","Shollingnalur",
+				  LocalDate.now(), LocalTime.now(),10,2,8,LocalTime.of(10,
+				  35),null,"Assigned",null,null,null,null,0); triprepo.save(tripdetails);
+				  
+				  BookingRequest book2=new
+				  BookingRequest(10024,"10723","Gokul","alphacity","shollinganallur",
+				  "velachery",
+				  LocalDateTime.now(),LocalTime.now(),0,10002,null,null,null,null,"assigned",
+				  null,null,null,null,0); repo.save(book2);
+				 
 			
 			}
 		};

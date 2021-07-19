@@ -514,7 +514,7 @@ function tripaftercancelling() {
     xhrupdate.onreadystatechange = function() {
         if (xhrupdate.readyState == 4 && xhrupdate.status == 200) {
             //sessionStorage.clear();
-                
+            sessionStorage.removeItem('commonFileTripId');   
             window.location.href= "No-Trip-Assigned-Page.html";
 
         }
